@@ -16,13 +16,9 @@ class CovidProvider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: CovidConfigurationIntent, in context: Context, completion: @escaping (CovidEntry) -> ()) {
-        loadArea(for: .init(code: "1", kind: .russianState)) { area in
-            let entry = CovidEntry(
-                date: .now,
-                area: area,
-                configuration: configuration
-            )
-            
+        guard let request = request(from: configuration) else { return }
+        
+        loadEntry(for: request, configuration: configuration) { entry in
             completion(entry)
         }
         
@@ -30,9 +26,25 @@ class CovidProvider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: CovidConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+        guard let request = request(from: configuration) else { return }
+        
+        loadEntry(for: request, configuration: configuration) { entry in
+            guard let updateDate = Calendar.current.date(byAdding: .hour, value: 1, to: .now) else {
+                return
+            }
+
+            let timeline = Timeline(entries: [entry], policy: .after(updateDate))
+
+            completion(timeline)
+        }
+    }
+    
+    private var cancellation: AnyCancellable?
+
+    private func request(from configuration: CovidConfigurationIntent) -> AreaRequest? {
         guard let code = configuration.area?.identifier,
               let isCountry = configuration.area?.isCountry?.boolValue else {
-            return
+            return nil
         }
         
         let request = AreaRequest(
@@ -40,59 +52,51 @@ class CovidProvider: IntentTimelineProvider {
             kind: isCountry ? .country : .russianState
         )
         
-        loadArea(for: request) { area in
-            guard let updateDate = Calendar.current.date(byAdding: .hour, value: 1, to: .now) else {
-                return
-            }
-            
-            let entry = CovidEntry(
-                date: .now,
-                area: area,
-                configuration: configuration
-            )
-            
-            let timeline = Timeline(entries: [entry], policy: .after(updateDate))
-
-            completion(timeline)
-        }
+        return request
     }
     
-    private func loadArea(for request: AreaRequest, completion: @escaping (Area) -> Void) {
+    private func loadEntry(for request: AreaRequest,
+                           configuration: CovidConfigurationIntent,
+                           completion: @escaping (CovidEntry) -> Void) {
         if cancellation != nil {
             cancellation?.cancel()
         }
 
         cancellation = CovidDataSource.shared.areaDataPublisher(request)
-            .sink(receiveCompletion: { error in print(error) },
-                  receiveValue: { area in completion(area) })
+            .sink(receiveCompletion: { status in print(status) },
+                  receiveValue: { area in
+                    var statistic: Statistic {
+                        switch configuration.statisticType {
+                        case .daily, .unknown: return area.dailyStatistic
+                        case .allTime: return area.allTimeStatistic
+                        }
+                    }
+                    
+                    let entry = CovidEntry(
+                        date: .now,
+                        areaName: area.name,
+                        statistic: statistic,
+                        configuration: configuration
+                    )
+                    
+                    completion(entry)
+                  })
     }
-    
-    private var cancellation: AnyCancellable?
 }
 
 struct CovidEntry: TimelineEntry {
     let date: Date
-    let area: Area
+    let areaName: String
+    let statistic: Statistic
     let configuration: CovidConfigurationIntent
     
     static let placeholder: CovidEntry = .init(
         date: .now,
-        area: Area(
-            code: "1",
-            kind: .russianState,
-            name: "Москва",
-            population: 1,
-            allTimeStatistic: .init(
-                cases: 1,
-                cured: 1,
-                deaths: 0
-            ),
-            dailyStatistic: .init(
-                cases: 1,
-                cured: 1,
-                deaths: 0
-            ),
-            statisticTimeline: nil
+        areaName: "Москва",
+        statistic: .init(
+            cases: 1000,
+            cured: 1000,
+            deaths: 0
         ),
         configuration: CovidConfigurationIntent()
     )
@@ -103,11 +107,33 @@ struct CovidWidgetEntryView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(entry.area.name).font(.headline)
-            Text("Заражены: \(entry.area.allTimeStatistic.cases)")
-            Text("Вылечилось: \(entry.area.allTimeStatistic.cured)")
-            Text("Умерло: \(entry.area.allTimeStatistic.deaths)")
+            HStack(alignment: .top) {
+                Text(entry.areaName)
+                    .font(.headline)
+                    .minimumScaleFactor(0.4)
+                    .lineLimit(2)
+                Spacer()
+                Text(entry.date.shortFormatted)
+                    .font(.callout)
+                    .lineLimit(1)
+                    .foregroundColor(.secondary)
+            }
+            Spacer()
+            HStack {
+                Spacer()
+                Text("-\(entry.statistic.cured)")
+                    .foregroundColor(.green)
+                    .font(.caption)
+                Text("-\(entry.statistic.deaths)")
+                    .font(.caption)
+                    .foregroundColor(.red)
+            }
+            Text("+\(entry.statistic.cases)")
+                .font(.title)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .foregroundColor(.orange)
         }
+        .padding(16)
     }
 }
 
@@ -119,8 +145,8 @@ struct CovidWidget: Widget {
         IntentConfiguration(kind: kind, intent: CovidConfigurationIntent.self, provider: CovidProvider()) { entry in
             CovidWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Статистика Covid19")
+        .description("Мониторинг статистики случаев заражения вирусом.")
     }
 }
 
