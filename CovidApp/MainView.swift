@@ -12,7 +12,7 @@ struct MainView: View {
 
     var body: some View {
         NavigationView {
-            List(viewModel.covidData?.russianAreas ?? []) { area in
+            List(viewModel.covidData?.russianStates ?? []) { area in
                 VStack(alignment: .leading) {
                     Text(area.name).font(.headline)
                     Text("Заражены: \(area.allTimeStatistic.cases)")
@@ -21,6 +21,11 @@ struct MainView: View {
                 }
             }
             .navigationBarTitle("Области")
+            .navigationBarItems(
+                trailing: Button("Лоад", action: {
+                    print("Fuck")
+                })
+            )
         }
         .onAppear {
             viewModel.loadData()
