@@ -30,7 +30,17 @@ class CovidProvider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: CovidConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        loadArea(for: .init(code: "1", kind: .russianState)) { area in
+        guard let code = configuration.area?.identifier,
+              let isCountry = configuration.area?.isCountry?.boolValue else {
+            return
+        }
+        
+        let request = AreaRequest(
+            code: code,
+            kind: isCountry ? .country : .russianState
+        )
+        
+        loadArea(for: request) { area in
             guard let updateDate = Calendar.current.date(byAdding: .hour, value: 1, to: .now) else {
                 return
             }
@@ -92,7 +102,12 @@ struct CovidWidgetEntryView: View {
     var entry: CovidEntry
 
     var body: some View {
-        Text(entry.area.name)
+        VStack(alignment: .leading) {
+            Text(entry.area.name).font(.headline)
+            Text("Заражены: \(entry.area.allTimeStatistic.cases)")
+            Text("Вылечилось: \(entry.area.allTimeStatistic.cured)")
+            Text("Умерло: \(entry.area.allTimeStatistic.deaths)")
+        }
     }
 }
 

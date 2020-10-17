@@ -6,6 +6,7 @@
 //
 
 import Intents
+import Combine
 
 class IntentHandler: INExtension {
     
@@ -16,4 +17,50 @@ class IntentHandler: INExtension {
         return self
     }
     
+    private var cancelation: Cancellable?
+}
+
+extension IntentHandler: CovidConfigurationIntentHandling {
+    func provideAreaOptionsCollection(for intent: CovidConfigurationIntent, searchTerm: String?, with completion: @escaping (INObjectCollection<AreaCode>?, Error?) -> Void) {
+        cancelation = CovidDataSource.shared.dataPublisher()
+            .sink(receiveCompletion: { error in
+                switch error {
+                case .failure(let error):
+                    completion(nil, error)
+                case .finished:
+                    break
+                }
+            }, receiveValue: { data in
+                
+                func createSection(from areas: [Area], with title: String) -> INObjectSection<AreaCode> {
+                    let areasCodes: [AreaCode] = areas
+                        .filter { area in
+                            guard let searchTerm = searchTerm?.lowercased() else { return true }
+                            
+                            let areaName = area.name.lowercased()
+                            return areaName.contains(searchTerm)
+                        }
+                        .map { area in
+                            let areaCode = AreaCode(identifier: area.code, display: area.name)
+
+                            if case .country = area.kind {
+                                areaCode.isCountry = NSNumber(booleanLiteral: true)
+                            } else {
+                                areaCode.isCountry = NSNumber(booleanLiteral: false)
+                            }
+
+                            return areaCode
+                        }
+                    
+                    return INObjectSection(title: title, items: areasCodes)
+                }
+                                
+                let collection = INObjectCollection(sections: [
+                    createSection(from: data.russianStates, with: "Регионы России"),
+                    createSection(from: data.countries, with: "Страны")
+                ])
+                
+                completion(collection, nil)
+            })
+    }
 }

@@ -25,6 +25,8 @@
 		A52DC589253AF1910023358D /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC587253AF1910023358D /* Date+Extension.swift */; };
 		A52DC593253AF2FE0023358D /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC592253AF2FE0023358D /* IntentHandler.swift */; };
 		A52DC597253AF2FE0023358D /* CovidIntentsHandler.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A52DC590253AF2FE0023358D /* CovidIntentsHandler.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A52DC59E253B23700023358D /* CovidWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A52DC56F253ACEB70023358D /* CovidWidget.intentdefinition */; };
+		A52DC5A2253B23F10023358D /* CovidDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC5512539ED8E0023358D /* CovidDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,7 @@
 		A52DC590253AF2FE0023358D /* CovidIntentsHandler.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CovidIntentsHandler.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52DC592253AF2FE0023358D /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		A52DC594253AF2FE0023358D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A52DC5A6253B27F90023358D /* CovidApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CovidApp.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +135,7 @@
 		A52DC5402539ED6A0023358D /* CovidApp */ = {
 			isa = PBXGroup;
 			children = (
+				A52DC5A6253B27F90023358D /* CovidApp.entitlements */,
 				A52DC5512539ED8E0023358D /* CovidDataSource.swift */,
 				A52DC5412539ED6A0023358D /* CovidApp.swift */,
 				A52DC5562539FDD90023358D /* MainViewModel.swift */,
@@ -334,7 +338,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A52DC59E253B23700023358D /* CovidWidget.intentdefinition in Sources */,
 				A52DC593253AF2FE0023358D /* IntentHandler.swift in Sources */,
+				A52DC5A2253B23F10023358D /* CovidDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +482,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CovidApp/CovidApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CovidApp/Preview Content\"";
 				DEVELOPMENT_TEAM = CT884K7983;
@@ -499,6 +506,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CovidApp/CovidApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CovidApp/Preview Content\"";
 				DEVELOPMENT_TEAM = CT884K7983;

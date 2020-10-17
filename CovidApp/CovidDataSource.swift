@@ -62,7 +62,6 @@ enum CovidError: Error {
 }
 
 class CovidDataSource {
-        
     static let shared: CovidDataSource = .init()
     
     func dataPublisher() -> AnyPublisher<CovidData, CovidError> {
