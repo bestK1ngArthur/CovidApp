@@ -110,8 +110,10 @@ class CovidDataSource {
     
     private let session = URLSession.shared
     
-    private let dataURL = URL(string: "https://yastat.net/s3/milab/2020/covid19-stat/data/default_data.json")!
-    private let areaURL = URL(string: "https://yastat.net/s3/milab/2020/covid19-stat/data/data-by-region")!
+    private let baseURL = URL(string: "https://yastat.net/s3/milab/2020/covid19-stat/data")!
+    
+    private var dataURL: URL { baseURL.appendingPathComponent("default_data.json") }
+    private var areaURL: URL { baseURL.appendingPathComponent("data-by-region") }
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

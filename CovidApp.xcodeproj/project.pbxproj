@@ -27,6 +27,7 @@
 		A52DC597253AF2FE0023358D /* CovidIntentsHandler.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A52DC590253AF2FE0023358D /* CovidIntentsHandler.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A52DC59E253B23700023358D /* CovidWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A52DC56F253ACEB70023358D /* CovidWidget.intentdefinition */; };
 		A52DC5A2253B23F10023358D /* CovidDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC5512539ED8E0023358D /* CovidDataSource.swift */; };
+		A52DC5C6253B50A00023358D /* CovidProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC5C5253B50A00023358D /* CovidProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		A52DC592253AF2FE0023358D /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		A52DC594253AF2FE0023358D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A52DC5A6253B27F90023358D /* CovidApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CovidApp.entitlements; sourceTree = "<group>"; };
+		A52DC5C5253B50A00023358D /* CovidProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				A52DC56D253ACEB70023358D /* CovidWidget.swift */,
+				A52DC5C5253B50A00023358D /* CovidProvider.swift */,
 				A52DC56F253ACEB70023358D /* CovidWidget.intentdefinition */,
 				A52DC570253ACEBA0023358D /* Assets.xcassets */,
 				A52DC572253ACEBA0023358D /* Info.plist */,
@@ -328,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A52DC573253ACEBA0023358D /* CovidWidget.intentdefinition in Sources */,
+				A52DC5C6253B50A00023358D /* CovidProvider.swift in Sources */,
 				A52DC589253AF1910023358D /* Date+Extension.swift in Sources */,
 				A52DC56E253ACEB70023358D /* CovidWidget.swift in Sources */,
 				A52DC57E253ACEC60023358D /* CovidDataSource.swift in Sources */,
