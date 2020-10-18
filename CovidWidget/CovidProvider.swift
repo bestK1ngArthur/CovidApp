@@ -27,7 +27,7 @@ class CovidProvider: IntentTimelineProvider {
         guard let request = request(from: configuration) else { return }
         
         loadEntry(for: request, configuration: configuration) { entry in
-            guard let updateDate = Calendar.current.date(byAdding: .hour, value: 1, to: .now) else {
+            guard let updateDate = Calendar.current.date(byAdding: .hour, value: 12, to: .now) else {
                 return
             }
 
@@ -70,10 +70,34 @@ class CovidProvider: IntentTimelineProvider {
                         }
                     }
                     
+                    func normalizeData(from timeline: [StatisticTimelineEvent]) -> [Float] {
+                        let data = timeline.map { Float($0.statistic.cases) }
+                        
+                        guard let maxValue = data.max() else { return [] }
+                        
+                        let normalizedData = data.map { value in
+                            value / maxValue
+                        }
+                        
+                        return normalizedData
+                    }
+                    
+                    var timelineData: [Float] {
+                        guard let timeline = area.statisticTimeline else { return [] }
+                        
+                        switch configuration.statisticType {
+                        case .daily, .unknown:
+                            return normalizeData(from: Array(timeline.daily.prefix(14)))
+                        case .allTime:
+                            return normalizeData(from: Array(timeline.allTime))
+                        }
+                    }
+                    
                     let entry = CovidEntry(
                         date: .now,
                         areaName: area.name,
                         statistic: statistic,
+                        timelineData: timelineData,
                         configuration: configuration
                     )
                     
@@ -86,6 +110,7 @@ struct CovidEntry: TimelineEntry {
     let date: Date
     let areaName: String
     let statistic: Statistic
+    let timelineData: [Float]
     let configuration: CovidConfigurationIntent
     
     static let placeholder: CovidEntry = .init(
@@ -96,6 +121,7 @@ struct CovidEntry: TimelineEntry {
             cured: 1000,
             deaths: 0
         ),
+        timelineData: [],
         configuration: CovidConfigurationIntent()
     )
 }

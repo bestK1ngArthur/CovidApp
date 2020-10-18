@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WidgetKit
+import Charts
 
 struct CovidWidgetEntryView: View {
     var entry: CovidEntry
@@ -24,6 +25,15 @@ struct CovidWidgetEntryView: View {
                     .lineLimit(1)
                     .foregroundColor(.secondary)
             }
+            Spacer()
+            Chart(data: entry.timelineData)
+                .chartStyle(
+                    AreaChartStyle(.quadCurve, fill: LinearGradient(
+                                    gradient: .init(colors: [Color.orange, Color.orange.opacity(0.1)]),
+                                    startPoint: .top,
+                                    endPoint: .bottom)
+                    )
+                )
             Spacer()
             HStack {
                 Spacer()
@@ -55,13 +65,19 @@ struct CovidWidget: Widget {
             CovidWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Статистика Covid19")
-        .description("Мониторинг статистики случаев заражения вирусом.")
+        .description("Мониторинг статистики заражения коронавирусом.")
     }
 }
 
 struct CovidWidget_Previews: PreviewProvider {
     static var previews: some View {
-        CovidWidgetEntryView(entry: .placeholder)
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        Group {
+            CovidWidgetEntryView(entry: .placeholder)
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+            CovidWidgetEntryView(entry: .placeholder)
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            CovidWidgetEntryView(entry: .placeholder)
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
+        }
     }
 }

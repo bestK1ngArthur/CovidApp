@@ -63,4 +63,10 @@ extension IntentHandler: CovidConfigurationIntentHandling {
                 completion(collection, nil)
             })
     }
+    
+    func defaultArea(for intent: CovidConfigurationIntent) -> AreaCode? {
+        let areaCode = AreaCode(identifier: "213", display: "Москва")
+        areaCode.isCountry = NSNumber(booleanLiteral: false)
+        return areaCode
+    }
 }

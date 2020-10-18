@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,8 @@
 		A52DC59E253B23700023358D /* CovidWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A52DC56F253ACEB70023358D /* CovidWidget.intentdefinition */; };
 		A52DC5A2253B23F10023358D /* CovidDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC5512539ED8E0023358D /* CovidDataSource.swift */; };
 		A52DC5C6253B50A00023358D /* CovidProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC5C5253B50A00023358D /* CovidProvider.swift */; };
+		A52DC5CC253B56D30023358D /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = A52DC5CB253B56D30023358D /* Charts */; };
+		A52DC5D4253B57FB0023358D /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = A52DC5D3253B57FB0023358D /* Charts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A52DC5CC253B56D30023358D /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +102,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A52DC56B253ACEB70023358D /* SwiftUI.framework in Frameworks */,
+				A52DC5D4253B57FB0023358D /* Charts in Frameworks */,
 				A52DC569253ACEB70023358D /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,6 +211,9 @@
 				A52DC596253AF2FE0023358D /* PBXTargetDependency */,
 			);
 			name = CovidApp;
+			packageProductDependencies = (
+				A52DC5CB253B56D30023358D /* Charts */,
+			);
 			productName = Covid19;
 			productReference = A52DC53E2539ED6A0023358D /* CovidApp.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +231,9 @@
 			dependencies = (
 			);
 			name = CovidWidgetExtension;
+			packageProductDependencies = (
+				A52DC5D3253B57FB0023358D /* Charts */,
+			);
 			productName = CovidWidgetExtension;
 			productReference = A52DC566253ACEB70023358D /* CovidWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -274,6 +284,9 @@
 				Base,
 			);
 			mainGroup = A52DC5352539ED6A0023358D;
+			packageReferences = (
+				A52DC5CA253B56D30023358D /* XCRemoteSwiftPackageReference "swiftui-charts" */,
+			);
 			productRefGroup = A52DC53F2539ED6A0023358D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -648,6 +661,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A52DC5CA253B56D30023358D /* XCRemoteSwiftPackageReference "swiftui-charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swift-extensions/swiftui-charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A52DC5CB253B56D30023358D /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A52DC5CA253B56D30023358D /* XCRemoteSwiftPackageReference "swiftui-charts" */;
+			productName = Charts;
+		};
+		A52DC5D3253B57FB0023358D /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A52DC5CA253B56D30023358D /* XCRemoteSwiftPackageReference "swiftui-charts" */;
+			productName = Charts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A52DC5362539ED6A0023358D /* Project object */;
 }
