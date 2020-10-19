@@ -70,9 +70,7 @@ class CovidProvider: IntentTimelineProvider {
                         }
                     }
                     
-                    func normalizeData(from timeline: [StatisticTimelineEvent]) -> [Float] {
-                        let data = timeline.map { Float($0.statistic.cases) }
-                        
+                    func normalizeData(from data: [Float], max: Float) -> [Float] {
                         guard let maxValue = data.max() else { return [] }
                         
                         let normalizedData = data.map { value in
@@ -83,13 +81,16 @@ class CovidProvider: IntentTimelineProvider {
                     }
                     
                     var timelineData: [Float] {
-                        guard let timeline = area.statisticTimeline else { return [] }
-                        
+                        guard let timelineData = area.statisticTimeline?.daily.map({ Float($0.statistic.cases) }),
+                              let max = timelineData.max() else {
+                            return []
+                        }
+                                                
                         switch configuration.statisticType {
                         case .daily, .unknown:
-                            return normalizeData(from: Array(timeline.daily.prefix(14)))
+                            return normalizeData(from: Array(timelineData.suffix(14)), max: max)
                         case .allTime:
-                            return normalizeData(from: Array(timeline.allTime))
+                            return normalizeData(from: Array(timelineData), max: max)
                         }
                     }
                     

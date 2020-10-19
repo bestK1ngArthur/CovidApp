@@ -12,6 +12,12 @@ struct Statistic {
     let cases: Int
     let cured: Int
     let deaths: Int
+    
+    static let zero = Statistic(
+        cases: 0,
+        cured: 0,
+        deaths: 0
+    )
 }
 
 struct StatisticTimeline {
@@ -19,12 +25,14 @@ struct StatisticTimeline {
     let daily: [StatisticTimelineEvent]
 }
 
-struct StatisticTimelineEvent {
+struct StatisticTimelineEvent: Identifiable {
     let date: Date
     let statistic: Statistic
+    
+    let id = UUID()
 }
 
-struct Area: Identifiable {
+struct Area {
     typealias Code = String
 
     enum Kind {
@@ -40,8 +48,6 @@ struct Area: Identifiable {
     let dailyStatistic: Statistic
     
     let statisticTimeline: StatisticTimeline?
-    
-    let id = UUID()
 }
 
 struct AreaRequest {
@@ -194,7 +200,7 @@ class CovidDataSource {
            let rawCases = raw["cases"] as? [[Int]],
            let rawCured = raw["cured"] as? [[Int]],
            let rawDeaths = raw["deaths"] as? [[Int]] {
-            guard dates.count == rawCases.count,
+            guard dates.count <= rawCases.count,
                   rawCases.count == rawCured.count,
                   rawCured.count == rawDeaths.count else {
                 throw CovidError.invalidStatisticTimeline
