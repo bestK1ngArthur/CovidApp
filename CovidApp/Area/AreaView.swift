@@ -71,7 +71,7 @@ struct AreaView: View {
                     )
                     .frame(height: 200)
                 Text("Все данные")
-                    .padding(.vertical, 8)
+                    .padding(.top, 8)
                     .font(.headline)
                 ForEach(viewModel.timelineEvents) { event in
                     VStack {

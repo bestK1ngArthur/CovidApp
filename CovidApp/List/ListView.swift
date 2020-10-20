@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ListView.swift
 //  Covid19
 //
 //  Created by Artem Belkov on 16.10.2020.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct MainView: View {
-    @ObservedObject var viewModel = MainViewModel()
+struct ListView: View {
+    @ObservedObject var viewModel = ListViewModel()
 
     var body: some View {
         NavigationView {
@@ -20,7 +20,7 @@ struct MainView: View {
                             .padding(.init(top: 16, leading: 16, bottom: 0, trailing: 16))
                     ) {
                         ForEach(viewModel.russianStates) { viewModel in
-                            MainAreaView(viewModel: viewModel)
+                            ListAreaView(viewModel: viewModel)
                         }
                     }
                     Section(
@@ -29,19 +29,12 @@ struct MainView: View {
                             .padding(.init(top: 16, leading: 16, bottom: 0, trailing: 16))
                     ) {
                         ForEach(viewModel.countries) { viewModel in
-                            MainAreaView(viewModel: viewModel)
+                            ListAreaView(viewModel: viewModel)
                         }
                     }
                 }
             }
             .navigationBarTitle("Статистика")
-            .navigationBarItems(
-                trailing: NavigationLink(
-                    destination: SettingsView(),
-                    label: {
-                        Image(systemName: "gearshape.fill")
-                    })
-            )
         }
         .onAppear {
             UIScrollView.appearance().backgroundColor = .primaryBackground
@@ -50,8 +43,8 @@ struct MainView: View {
     }
 }
 
-struct MainView_Previews: PreviewProvider {
+struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        ListView()
     }
 }

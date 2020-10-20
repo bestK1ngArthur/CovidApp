@@ -1,5 +1,5 @@
 //
-//  MainAreaView.swift
+//  ListAreaView.swift
 //  CovidApp
 //
 //  Created by Artem Belkov on 18.10.2020.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct MainAreaView: View {
-    @State var viewModel: MainAreaViewModel
+struct ListAreaView: View {
+    @State var viewModel: ListAreaViewModel
     
     var body: some View {
         NavigationLink(
@@ -54,7 +54,7 @@ struct MainAreaView: View {
 
 struct MainAreaView_Previews: PreviewProvider {
     static var previews: some View {
-        MainAreaView(
+        ListAreaView(
             viewModel: .init(
                 code: "213",
                 kind: .russianState,

@@ -11,7 +11,7 @@ import SwiftUI
 struct CovidApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            ListView()
         }
     }
 }
