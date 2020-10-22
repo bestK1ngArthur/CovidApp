@@ -105,6 +105,7 @@ struct AreaView: View {
             .padding(16)
         }
         .navigationBarTitleDisplayMode(.inline)
+        .redacted(reason: viewModel.isLoading ? .placeholder : [])
         .onAppear() {
             viewModel.loadData()
         }

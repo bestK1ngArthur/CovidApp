@@ -22,6 +22,8 @@ class AreaViewModel: ObservableObject {
 
     @Published var timelineEvents: [StatisticTimelineEvent] = []
     
+    var isLoading: Bool { name.isEmpty }
+    
     init(_ request: AreaRequest) {
         self.request = request
         
