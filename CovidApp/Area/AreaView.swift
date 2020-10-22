@@ -14,92 +14,79 @@ struct AreaView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Text(viewModel.name)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.system(size: 28, weight: .bold))
-                HStack {
-                    Text("+\(viewModel.statistic.cases)")
-                        .font(.title)
-                        .lineLimit(1)
-                        .foregroundColor(.orange)
-                    Text("-\(viewModel.statistic.cured)")
-                        .font(.title)
-                        .lineLimit(1)
-                        .font(.caption)
-                        .foregroundColor(.green)
-                    Text("-\(viewModel.statistic.deaths)")
-                        .font(.title)
-                        .lineLimit(1)
-                        .foregroundColor(.red)
-                    Spacer()
-                }
-                Text("Интервал")
-                    .padding(.top, 8)
-                    .font(.headline)
-                Picker("Интервал", selection: $viewModel.timeInterval) {
-                    ForEach(AreaViewModel.TimeInterval.allCases) { interval in
-                        Text(interval.rawValue).tag(interval)
+                AreaHeaderView(name: viewModel.name, statistic: viewModel.statistic)
+                AreaSectionView("Интервал") {
+                    Picker("Интервал", selection: $viewModel.timeInterval) {
+                        ForEach(AreaViewModel.TimeInterval.allCases) { interval in
+                            Text(interval.rawValue).tag(interval)
+                        }
                     }
+                    .pickerStyle(SegmentedPickerStyle())
                 }
-                .pickerStyle(SegmentedPickerStyle())
-                Text("Показатель")
-                    .padding(.top, 8)
-                    .font(.headline)
-                Picker("Показатель", selection: $viewModel.rateType) {
-                    ForEach(AreaViewModel.RateType.allCases) { interval in
-                        Text(interval.rawValue).tag(interval)
+                AreaSectionView("Показатель") {
+                    Picker("Показатель", selection: $viewModel.rateType) {
+                        ForEach(AreaViewModel.RateType.allCases) { interval in
+                            Text(interval.rawValue).tag(interval)
+                        }
                     }
+                    .pickerStyle(SegmentedPickerStyle())
                 }
-                .pickerStyle(SegmentedPickerStyle())
-                Text("График")
-                    .padding(.top, 8)
-                    .font(.headline)
-                Chart(data: viewModel.timelineData)
-                    .chartStyle(
-                        AreaChartStyle(
-                            .quadCurve,
-                            fill: LinearGradient(
-                                gradient: .init(
-                                    colors: [viewModel.timelineColor, viewModel.timelineColor.opacity(0.05)]
-                                ),
-                                startPoint: .top,
-                                endPoint: .bottom
+                AreaSectionView("График") {
+                    Chart(data: viewModel.timelineData)
+                        .chartStyle(
+                            AreaChartStyle(
+                                .quadCurve,
+                                fill: LinearGradient(
+                                    gradient: .init(
+                                        colors: [viewModel.timelineColor, viewModel.timelineColor.opacity(0.05)]
+                                    ),
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
                             )
                         )
-                    )
-                    .frame(height: 200)
-                Text("Все данные")
-                    .padding(.top, 8)
-                    .font(.headline)
-                ForEach(viewModel.timelineEvents) { event in
-                    VStack {
-                        Text(event.date, style: .date)
-                            .font(.title3)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.top, 8)
-                            .padding(.bottom, 2)
-                        HStack {
-                            Text("+\(event.statistic.cases)")
-                                .font(.headline)
-                                .lineLimit(1)
-                                .foregroundColor(.orange)
-                            Text("-\(event.statistic.cured)")
-                                .font(.headline)
-                                .lineLimit(1)
-                                .font(.caption)
-                                .foregroundColor(.green)
-                            Text("-\(event.statistic.deaths)")
-                                .font(.headline)
-                                .lineLimit(1)
-                                .foregroundColor(.red)
-                            Spacer()
+                        .frame(height: 200)
+                }
+                AreaSectionView("Данные за месяц") {
+                    ForEach(viewModel.timelineEvents.suffix(30)) { event in
+                        VStack {
+                            Text(event.date, style: .date)
+                                .font(.title3)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.top, 8)
+                                .padding(.bottom, 2)
+                            HStack {
+                                Text("+\(event.statistic.cases)")
+                                    .font(.headline)
+                                    .lineLimit(1)
+                                    .foregroundColor(.orange)
+                                Text("-\(event.statistic.cured)")
+                                    .font(.headline)
+                                    .lineLimit(1)
+                                    .font(.caption)
+                                    .foregroundColor(.green)
+                                Text("-\(event.statistic.deaths)")
+                                    .font(.headline)
+                                    .lineLimit(1)
+                                    .foregroundColor(.red)
+                                Spacer()
+                            }
+                            .padding(.bottom, 8)
                         }
-                        .padding(.bottom, 8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 16)
+                        .background(Color.secondaryBackground)
+                        .cornerRadius(16)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 16)
-                    .background(Color.secondaryBackground)
-                    .cornerRadius(16)
+                    HStack {
+                        Text("Данные предоставлены ")
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
+                        Link("yandex.ru", destination: URL(string: "https://yandex.ru/covid19/stat/widget/default/")!)
+                            .font(.system(size: 12, weight: .semibold))
+                            .padding(.leading, -8)
+                        Spacer()
+                    }
                 }
             }
             .padding(16)

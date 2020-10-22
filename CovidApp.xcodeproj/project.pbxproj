@@ -39,6 +39,8 @@
 		A53EE53E25415308003508D9 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53EE53D25415308003508D9 /* Collection+Extension.swift */; };
 		A53EE545254153A5003508D9 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53EE53D25415308003508D9 /* Collection+Extension.swift */; };
 		A53EE549254153BD003508D9 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53EE53D25415308003508D9 /* Collection+Extension.swift */; };
+		A53EE54E2541FF88003508D9 /* AreaHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53EE54D2541FF88003508D9 /* AreaHeaderView.swift */; };
+		A53EE553254200D0003508D9 /* AreaSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53EE552254200D0003508D9 /* AreaSectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,8 @@
 		A52DC5E2253C0E680023358D /* ListAreaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAreaViewModel.swift; sourceTree = "<group>"; };
 		A53EE535254147BD003508D9 /* ListSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSearchBar.swift; sourceTree = "<group>"; };
 		A53EE53D25415308003508D9 /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
+		A53EE54D2541FF88003508D9 /* AreaHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaHeaderView.swift; sourceTree = "<group>"; };
+		A53EE552254200D0003508D9 /* AreaSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,8 @@
 			children = (
 				A51DC85F253C2A7B004F1761 /* AreaViewModel.swift */,
 				A51DC84F253C29C8004F1761 /* AreaView.swift */,
+				A53EE54D2541FF88003508D9 /* AreaHeaderView.swift */,
+				A53EE552254200D0003508D9 /* AreaSectionView.swift */,
 			);
 			path = Area;
 			sourceTree = "<group>";
@@ -374,6 +380,7 @@
 				A51DC860253C2A7B004F1761 /* AreaViewModel.swift in Sources */,
 				A52DC5522539ED8E0023358D /* CovidDataSource.swift in Sources */,
 				A52DC574253ACEBA0023358D /* CovidWidget.intentdefinition in Sources */,
+				A53EE553254200D0003508D9 /* AreaSectionView.swift in Sources */,
 				A53EE536254147BD003508D9 /* ListSearchBar.swift in Sources */,
 				A51DC847253C1D7A004F1761 /* Color+Extension.swift in Sources */,
 				A52DC5572539FDD90023358D /* ListViewModel.swift in Sources */,
@@ -381,6 +388,7 @@
 				A52DC5E3253C0E680023358D /* ListAreaViewModel.swift in Sources */,
 				A52DC5DE253C0E3B0023358D /* ListAreaView.swift in Sources */,
 				A51DC850253C29C8004F1761 /* AreaView.swift in Sources */,
+				A53EE54E2541FF88003508D9 /* AreaHeaderView.swift in Sources */,
 				A52DC588253AF1910023358D /* Date+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
