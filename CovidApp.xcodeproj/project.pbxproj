@@ -41,6 +41,9 @@
 		A53EE549254153BD003508D9 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53EE53D25415308003508D9 /* Collection+Extension.swift */; };
 		A53EE54E2541FF88003508D9 /* AreaHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53EE54D2541FF88003508D9 /* AreaHeaderView.swift */; };
 		A53EE553254200D0003508D9 /* AreaSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53EE552254200D0003508D9 /* AreaSectionView.swift */; };
+		A56CF47025421C9F0086396D /* CovidModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56CF46F25421C9F0086396D /* CovidModels.swift */; };
+		A56CF47A25421D540086396D /* CovidModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56CF46F25421C9F0086396D /* CovidModels.swift */; };
+		A56CF47E25421D540086396D /* CovidModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56CF46F25421C9F0086396D /* CovidModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +109,7 @@
 		A53EE53D25415308003508D9 /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		A53EE54D2541FF88003508D9 /* AreaHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaHeaderView.swift; sourceTree = "<group>"; };
 		A53EE552254200D0003508D9 /* AreaSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSectionView.swift; sourceTree = "<group>"; };
+		A56CF46F25421C9F0086396D /* CovidModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,13 +189,11 @@
 			isa = PBXGroup;
 			children = (
 				A52DC5A6253B27F90023358D /* CovidApp.entitlements */,
-				A52DC5512539ED8E0023358D /* CovidDataSource.swift */,
 				A52DC5412539ED6A0023358D /* CovidApp.swift */,
+				A56CF46825421C880086396D /* Data */,
 				A51DC84B253C29AD004F1761 /* List */,
 				A51DC854253C29CE004F1761 /* Area */,
-				A52DC587253AF1910023358D /* Date+Extension.swift */,
-				A51DC846253C1D7A004F1761 /* Color+Extension.swift */,
-				A53EE53D25415308003508D9 /* Collection+Extension.swift */,
+				A56CF46725421C3A0086396D /* Extensions */,
 				A52DC5452539ED6B0023358D /* Assets.xcassets */,
 				A52DC54A2539ED6B0023358D /* Info.plist */,
 				A52DC5472539ED6B0023358D /* Preview Content */,
@@ -235,6 +237,25 @@
 				A52DC594253AF2FE0023358D /* Info.plist */,
 			);
 			path = CovidIntentsHandler;
+			sourceTree = "<group>";
+		};
+		A56CF46725421C3A0086396D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A52DC587253AF1910023358D /* Date+Extension.swift */,
+				A51DC846253C1D7A004F1761 /* Color+Extension.swift */,
+				A53EE53D25415308003508D9 /* Collection+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A56CF46825421C880086396D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A56CF46F25421C9F0086396D /* CovidModels.swift */,
+				A52DC5512539ED8E0023358D /* CovidDataSource.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,6 +401,7 @@
 				A51DC860253C2A7B004F1761 /* AreaViewModel.swift in Sources */,
 				A52DC5522539ED8E0023358D /* CovidDataSource.swift in Sources */,
 				A52DC574253ACEBA0023358D /* CovidWidget.intentdefinition in Sources */,
+				A56CF47025421C9F0086396D /* CovidModels.swift in Sources */,
 				A53EE553254200D0003508D9 /* AreaSectionView.swift in Sources */,
 				A53EE536254147BD003508D9 /* ListSearchBar.swift in Sources */,
 				A51DC847253C1D7A004F1761 /* Color+Extension.swift in Sources */,
@@ -399,6 +421,7 @@
 			files = (
 				A52DC573253ACEBA0023358D /* CovidWidget.intentdefinition in Sources */,
 				A53EE545254153A5003508D9 /* Collection+Extension.swift in Sources */,
+				A56CF47A25421D540086396D /* CovidModels.swift in Sources */,
 				A52DC5C6253B50A00023358D /* CovidProvider.swift in Sources */,
 				A52DC589253AF1910023358D /* Date+Extension.swift in Sources */,
 				A52DC56E253ACEB70023358D /* CovidWidget.swift in Sources */,
@@ -410,6 +433,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A56CF47E25421D540086396D /* CovidModels.swift in Sources */,
 				A52DC59E253B23700023358D /* CovidWidget.intentdefinition in Sources */,
 				A53EE549254153BD003508D9 /* Collection+Extension.swift in Sources */,
 				A52DC593253AF2FE0023358D /* IntentHandler.swift in Sources */,
