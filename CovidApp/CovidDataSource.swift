@@ -71,6 +71,7 @@ class CovidDataSource {
     static let shared: CovidDataSource = .init()
     
     func dataPublisher() -> AnyPublisher<CovidData, CovidError> {
+
         session.dataTaskPublisher(for: dataURL)
             .tryCompactMap {
                 try JSONSerialization.jsonObject(with: $0.data, options: []) as? Raw
@@ -97,7 +98,7 @@ class CovidDataSource {
             .mapError { _ in CovidError.networkError }
             .eraseToAnyPublisher()
         
-        let areaRawPublisher: AnyPublisher<Raw, CovidError> = session.dataTaskPublisher(for: url(for: request))
+        let areaRawPublisher: AnyPublisher<Raw, CovidError> = session.dataTaskPublisher(for: areaURL(for: request))
             .tryCompactMap {
                 try JSONSerialization.jsonObject(with: $0.data, options: []) as? Raw
             }
@@ -116,17 +117,23 @@ class CovidDataSource {
     
     private let session = URLSession.shared
     
-    private let baseURL = URL(string: "https://yastat.net/s3/milab/2020/covid19-stat/data")!
-    
-    private var dataURL: URL { baseURL.appendingPathComponent("default_data.json") }
-    private var areaURL: URL { baseURL.appendingPathComponent("data-by-region") }
-    
+    private let basePath = "https://yastat.net/s3/milab/2020/covid19-stat/data"
+    private let apiVersion = "1"
+
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
-       
+    
+    private var dataURL: URL {
+        return url(with: "default_data.json")
+    }
+
+    private func areaURL(for request: AreaRequest) -> URL {
+        return url(with: "data-by-region/\(request.code).json")
+    }
+    
     private func key(for kind: Area.Kind) -> String {
         switch kind {
         case .russianState: return "russia_stat_struct"
@@ -134,8 +141,12 @@ class CovidDataSource {
         }
     }
     
-    private func url(for request: AreaRequest) -> URL {
-        return areaURL.appendingPathComponent("\(request.code).json")
+    private func url(with component: String) -> URL {
+        var components = URLComponents(string: basePath)!
+        
+        components.queryItems = [.init(name: "v", value: apiVersion)]
+        
+        return components.url!.appendingPathComponent(component)
     }
     
     private func parseAreas(from raw: Raw, for kind: Area.Kind) throws -> [Area] {
