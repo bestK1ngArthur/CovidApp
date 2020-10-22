@@ -10,9 +10,7 @@ import Charts
 
 struct AreaView: View {
     @ObservedObject var viewModel: AreaViewModel
-    
-    @State var selection = 0
-    
+        
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {

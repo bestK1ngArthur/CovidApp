@@ -24,6 +24,25 @@ class AreaViewModel: ObservableObject {
     
     init(_ request: AreaRequest) {
         self.request = request
+        
+        let updateInterval = $timeInterval.sink { [unowned self] timeInterval in
+            self.timelineData = self.timelineData(from: self.timelineEvents, timeInterval: timeInterval, rateType: self.rateType)
+        }
+        
+        bag.insert(updateInterval)
+
+        let updateRate = $rateType.sink { [unowned self] rateType in
+            self.timelineData = self.timelineData(from: self.timelineEvents, timeInterval: self.timeInterval, rateType: rateType)
+            self.timelineColor = {
+                switch rateType {
+                case .cases: return .orange
+                case .cured: return .green
+                case .deaths: return .red
+                }
+            }()
+        }
+        
+        bag.insert(updateRate)
     }
     
     func loadData() {
@@ -44,24 +63,7 @@ class AreaViewModel: ObservableObject {
                     }
                   })
         
-        let updateInterval = $timeInterval.sink { [unowned self] timeInterval in
-            self.timelineData = self.timelineData(from: self.timelineEvents, timeInterval: timeInterval, rateType: self.rateType)
-        }
-        
-        let updateRate = $rateType.sink { [unowned self] rateType in
-            self.timelineData = self.timelineData(from: self.timelineEvents, timeInterval: self.timeInterval, rateType: rateType)
-            self.timelineColor = {
-                switch rateType {
-                case .cases: return .orange
-                case .cured: return .green
-                case .deaths: return .red
-                }
-            }()
-        }
-        
         bag.insert(areaRequest)
-        bag.insert(updateInterval)
-        bag.insert(updateRate)
     }
     
     private var bag: Set<AnyCancellable> = []

@@ -14,22 +14,30 @@ struct ListView: View {
         NavigationView {
             ScrollView {
                 LazyVStack(alignment: .leading) {
-                    Section(
-                        header: Text("Регионы России")
-                            .font(.system(size: 22, weight: .bold))
-                            .padding(.init(top: 16, leading: 16, bottom: 0, trailing: 16))
-                    ) {
-                        ForEach(viewModel.russianStates) { viewModel in
-                            ListAreaView(viewModel: viewModel)
+                    ListSearchBar(text: $viewModel.searchText)
+                        .padding(.horizontal, 16)
+                    
+                    if viewModel.russianStates.isNotEmpty {
+                        Section(
+                            header: Text("Регионы России")
+                                .font(.system(size: 22, weight: .bold))
+                                .padding(.init(top: 16, leading: 16, bottom: 0, trailing: 16))
+                        ) {
+                            ForEach(viewModel.russianStates) { viewModel in
+                                ListAreaView(viewModel: viewModel)
+                            }
                         }
                     }
-                    Section(
-                        header: Text("Страны")
-                            .font(.system(size: 22, weight: .bold))
-                            .padding(.init(top: 16, leading: 16, bottom: 0, trailing: 16))
-                    ) {
-                        ForEach(viewModel.countries) { viewModel in
-                            ListAreaView(viewModel: viewModel)
+                    
+                    if viewModel.countries.isNotEmpty {
+                        Section(
+                            header: Text("Страны")
+                                .font(.system(size: 22, weight: .bold))
+                                .padding(.init(top: 16, leading: 16, bottom: 0, trailing: 16))
+                        ) {
+                            ForEach(viewModel.countries) { viewModel in
+                                ListAreaView(viewModel: viewModel)
+                            }
                         }
                     }
                 }
@@ -38,7 +46,6 @@ struct ListView: View {
         }
         .onAppear {
             UIScrollView.appearance().backgroundColor = .primaryBackground
-            viewModel.loadData()
         }
     }
 }

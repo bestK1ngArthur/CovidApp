@@ -11,10 +11,11 @@ import Combine
 class ListViewModel: ObservableObject {
     @Published var russianStates: [ListAreaViewModel] = []
     @Published var countries: [ListAreaViewModel] = []
+    @Published var searchText: String = ""
     
-    func loadData() {
-        cancellation = CovidDataSource.shared.dataPublisher()
-            .sink(receiveCompletion: { _ in},
+    init() {
+        let loadList = CovidDataSource.shared.dataPublisher()
+            .sink(receiveCompletion: { _ in },
                   receiveValue: { covidData in
                     DispatchQueue.main.async {
                         func mapAreas(_ areas: [Area]) -> [ListAreaViewModel] {
@@ -28,15 +29,33 @@ class ListViewModel: ObservableObject {
                             }
                         }
                         
-                        self.russianStates = mapAreas(covidData.russianStates)
-                        self.countries = mapAreas(covidData.countries)
+                        self.allRussianStates = mapAreas(covidData.russianStates)
+                        self.allCountries = mapAreas(covidData.countries)
+                        
+                        self.russianStates = self.allRussianStates
+                        self.countries = self.allCountries
                     }
                   })
+        
+        bag.insert(loadList)
+        
+        let filterList = $searchText.sink { [unowned self] searchText in
+            guard searchText.isNotEmpty else {
+                self.russianStates = self.allRussianStates
+                self.countries = self.allCountries
+                
+                return
+            }
+            
+            self.russianStates = self.allRussianStates.filter { $0.name.contains(searchText) }
+            self.countries = self.allCountries.filter { $0.name.contains(searchText) }
+        }
+        
+        bag.insert(filterList)
     }
     
-    func cancel() {
-        cancellation?.cancel()
-    }
+    private var allRussianStates: [ListAreaViewModel] = []
+    private var allCountries: [ListAreaViewModel] = []
 
-    private var cancellation: AnyCancellable?
+    private var bag: Set<AnyCancellable> = []
 }

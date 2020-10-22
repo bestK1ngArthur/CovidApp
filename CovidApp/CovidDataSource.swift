@@ -196,7 +196,7 @@ class CovidDataSource {
 
         var timeline: StatisticTimeline? = nil
         
-        if let dates = dates, !dates.isEmpty,
+        if let dates = dates, dates.isNotEmpty,
            let rawCases = raw["cases"] as? [[Int]],
            let rawCured = raw["cured"] as? [[Int]],
            let rawDeaths = raw["deaths"] as? [[Int]] {
