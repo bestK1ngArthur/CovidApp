@@ -81,17 +81,20 @@ class CovidProvider: IntentTimelineProvider {
                     }
                     
                     var timelineData: [Float] {
-                        guard let timelineData = area.statisticTimeline?.daily.map({ Float($0.statistic.cases) }),
-                              let max = timelineData.max() else {
+                        guard let allData = area.statisticTimeline?.daily.map({ Float($0.statistic.cases) }) else {
                             return []
                         }
-                                                
-                        switch configuration.statisticType {
-                        case .daily, .unknown:
-                            return normalizeData(from: Array(timelineData.suffix(14)), max: max)
-                        case .allTime:
-                            return normalizeData(from: Array(timelineData), max: max)
-                        }
+                        
+                        let data: [Float] = {
+                            switch configuration.statisticType {
+                            case .daily, .unknown: return Array(allData.suffix(14))
+                            case .allTime: return allData
+                            }
+                        }()
+                        
+                        guard let max = data.max() else { return [] }
+                        
+                        return normalizeData(from: data, max: max)
                     }
                     
                     let entry = CovidEntry(
