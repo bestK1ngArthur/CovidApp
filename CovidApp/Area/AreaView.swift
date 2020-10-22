@@ -47,10 +47,10 @@ struct AreaView: View {
                         )
                         .frame(height: 200)
                 }
-                AreaSectionView("Данные за месяц") {
-                    ForEach(viewModel.timelineEvents.suffix(30)) { event in
+                AreaSectionView("Все данные") {
+                    ForEach(viewModel.timelineEvents) { event in
                         VStack {
-                            Text(event.date, style: .date)
+                            Text(event.date.mediumFormatted)
                                 .font(.title3)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.top, 8)
