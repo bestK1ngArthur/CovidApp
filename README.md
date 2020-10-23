@@ -15,7 +15,5 @@ Pure SwiftUI iOS app that allows people to track COVID-19 cases in Russian regio
 * Widget
 
 <p align="center">
-  <img width=350 src="https://github.com/bestK1ngArthur/CovidApp/blob/main/Screenshots/List.png" alt="Icon"/>
-  <img width=350 src="https://github.com/bestK1ngArthur/CovidApp/blob/main/Screenshots/Area.png" alt="Icon"/>
-  <img width=350 src="https://github.com/bestK1ngArthur/CovidApp/blob/main/Screenshots/Widget.png" alt="Icon"/>
+  <img src="https://github.com/bestK1ngArthur/CovidApp/blob/main/Screenshots/Screenshots.png" alt="Icon"/>
 </p>
