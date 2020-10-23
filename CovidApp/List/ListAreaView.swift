@@ -24,10 +24,9 @@ struct ListAreaView: View {
             HStack {
                 Text(viewModel.name)
                     .font(.headline)
-                Spacer()
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 VStack(alignment: .trailing) {
                     HStack {
-                        Spacer()
                         Text("-\(viewModel.statistic.cured)")
                             .foregroundColor(.green)
                             .lineLimit(1)
@@ -37,9 +36,10 @@ struct ListAreaView: View {
                             .lineLimit(1)
                             .foregroundColor(.red)
                     }
+                    .frame(alignment: .trailing)
                     Text("+\(viewModel.statistic.cases)")
                         .font(.title)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .frame(alignment: .trailing)
                         .lineLimit(1)
                         .foregroundColor(.orange)
                 }
