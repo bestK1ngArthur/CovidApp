@@ -64,8 +64,8 @@ struct CovidWidget: Widget {
         IntentConfiguration(kind: kind, intent: CovidConfigurationIntent.self, provider: CovidProvider()) { entry in
             CovidWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Статистика Covid19")
-        .description("Мониторинг статистики заражения коронавирусом.")
+        .configurationDisplayName("COVID-19 statistics")
+        .description("Monitoring statistics")
     }
 }
 

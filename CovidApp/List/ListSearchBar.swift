@@ -17,7 +17,7 @@ struct ListSearchBar: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
                 .padding(.leading, 8)
-            TextField("Поиск", text: $text)
+            TextField("Search", text: $text)
                 .padding(8)
                 .background(Color.secondaryBackground)
 
@@ -31,7 +31,7 @@ struct ListSearchBar: View {
                     self.text = ""
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }) {
-                    Text("Отмена")
+                    Text("Cancel")
                 }
                 .padding(.trailing, 8)
                 .transition(.move(edge: .trailing))

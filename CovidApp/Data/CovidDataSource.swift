@@ -123,7 +123,7 @@ class CovidDataSource {
     
     private func parseArea(from raw: Raw, code: Area.Code, kind: Area.Kind, dates: [Date]? = nil) throws -> Area {
         guard let infoRaw = raw["info"] as? Raw,
-              let name = infoRaw["name"] as? String,
+              var name = infoRaw["name"] as? String,
               let population = infoRaw["population"] as? Int,
               let allCases = infoRaw["cases"] as? Int,
               let dailyCases = infoRaw["cases_delta"] as? Int,
@@ -133,7 +133,12 @@ class CovidDataSource {
               let dailyCured = infoRaw["cured_delta"] as? Int else {
             throw CovidError.parsingError
         }
-
+        
+        if Locale.current.languageCode == "en",
+           let englishName = infoRaw["name_en"] as? String {
+            name = englishName
+        }
+        
         let allTimeStatistic = Statistic(
             cases: allCases,
             cured: allCured,

@@ -103,9 +103,9 @@ class AreaViewModel: ObservableObject {
 extension AreaViewModel {
     
     enum TimeInterval: String, CaseIterable, Identifiable {
-        case week = "неделя"
-        case month = "месяц"
-        case allTime = "всё время"
+        case week = "week"
+        case month = "month"
+        case allTime = "all time"
         
         var id: String { rawValue }
     }

@@ -23,14 +23,12 @@ struct Formatters {
     
     static let shortDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ru_ru")
         formatter.dateFormat = "dd.MM"
         return formatter
     }()
     
     static let mediumDateFormatter : DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ru_ru")
         formatter.dateFormat = "dd MMMM, yyyy"
         return formatter
     }()

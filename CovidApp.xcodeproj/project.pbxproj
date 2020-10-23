@@ -20,15 +20,12 @@
 		A52DC56B253ACEB70023358D /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52DC56A253ACEB70023358D /* SwiftUI.framework */; };
 		A52DC56E253ACEB70023358D /* CovidWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC56D253ACEB70023358D /* CovidWidget.swift */; };
 		A52DC571253ACEBA0023358D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A52DC570253ACEBA0023358D /* Assets.xcassets */; };
-		A52DC573253ACEBA0023358D /* CovidWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A52DC56F253ACEB70023358D /* CovidWidget.intentdefinition */; };
-		A52DC574253ACEBA0023358D /* CovidWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A52DC56F253ACEB70023358D /* CovidWidget.intentdefinition */; };
 		A52DC577253ACEBA0023358D /* CovidWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A52DC566253ACEB70023358D /* CovidWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A52DC57E253ACEC60023358D /* CovidDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC5512539ED8E0023358D /* CovidDataSource.swift */; };
 		A52DC588253AF1910023358D /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC587253AF1910023358D /* Date+Extension.swift */; };
 		A52DC589253AF1910023358D /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC587253AF1910023358D /* Date+Extension.swift */; };
 		A52DC593253AF2FE0023358D /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC592253AF2FE0023358D /* IntentHandler.swift */; };
 		A52DC597253AF2FE0023358D /* CovidIntentsHandler.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A52DC590253AF2FE0023358D /* CovidIntentsHandler.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		A52DC59E253B23700023358D /* CovidWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A52DC56F253ACEB70023358D /* CovidWidget.intentdefinition */; };
 		A52DC5A2253B23F10023358D /* CovidDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC5512539ED8E0023358D /* CovidDataSource.swift */; };
 		A52DC5C6253B50A00023358D /* CovidProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52DC5C5253B50A00023358D /* CovidProvider.swift */; };
 		A52DC5CC253B56D30023358D /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = A52DC5CB253B56D30023358D /* Charts */; };
@@ -44,6 +41,12 @@
 		A56CF47025421C9F0086396D /* CovidModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56CF46F25421C9F0086396D /* CovidModels.swift */; };
 		A56CF47A25421D540086396D /* CovidModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56CF46F25421C9F0086396D /* CovidModels.swift */; };
 		A56CF47E25421D540086396D /* CovidModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56CF46F25421C9F0086396D /* CovidModels.swift */; };
+		A56CF4B8254325510086396D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A56CF4BA254325510086396D /* Localizable.strings */; };
+		A56CF4CA25432F570086396D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A56CF4BA254325510086396D /* Localizable.strings */; };
+		A56CF4CE25432FD90086396D /* CovidWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A56CF4D225432FD90086396D /* CovidWidget.intentdefinition */; };
+		A56CF4CF25432FD90086396D /* CovidWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A56CF4D225432FD90086396D /* CovidWidget.intentdefinition */; };
+		A56CF4D025432FD90086396D /* CovidWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A56CF4D225432FD90086396D /* CovidWidget.intentdefinition */; };
+		A56CF4F9254339C50086396D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A56CF4BA254325510086396D /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,7 +97,6 @@
 		A52DC568253ACEB70023358D /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		A52DC56A253ACEB70023358D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		A52DC56D253ACEB70023358D /* CovidWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidWidget.swift; sourceTree = "<group>"; };
-		A52DC56F253ACEB70023358D /* CovidWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = CovidWidget.intentdefinition; sourceTree = "<group>"; };
 		A52DC570253ACEBA0023358D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A52DC572253ACEBA0023358D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A52DC587253AF1910023358D /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -110,6 +112,10 @@
 		A53EE54D2541FF88003508D9 /* AreaHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaHeaderView.swift; sourceTree = "<group>"; };
 		A53EE552254200D0003508D9 /* AreaSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSectionView.swift; sourceTree = "<group>"; };
 		A56CF46F25421C9F0086396D /* CovidModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidModels.swift; sourceTree = "<group>"; };
+		A56CF4B9254325510086396D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A56CF4BE254325540086396D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A56CF4D125432FD90086396D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/CovidWidget.intentdefinition; sourceTree = "<group>"; };
+		A56CF4F52543381B0086396D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/CovidWidget.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +202,7 @@
 				A56CF46725421C3A0086396D /* Extensions */,
 				A52DC5452539ED6B0023358D /* Assets.xcassets */,
 				A52DC54A2539ED6B0023358D /* Info.plist */,
+				A56CF4BA254325510086396D /* Localizable.strings */,
 				A52DC5472539ED6B0023358D /* Preview Content */,
 			);
 			path = CovidApp;
@@ -223,7 +230,7 @@
 			children = (
 				A52DC56D253ACEB70023358D /* CovidWidget.swift */,
 				A52DC5C5253B50A00023358D /* CovidProvider.swift */,
-				A52DC56F253ACEB70023358D /* CovidWidget.intentdefinition */,
+				A56CF4D225432FD90086396D /* CovidWidget.intentdefinition */,
 				A52DC570253ACEBA0023358D /* Assets.xcassets */,
 				A52DC572253ACEBA0023358D /* Info.plist */,
 			);
@@ -348,6 +355,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = A52DC5352539ED6A0023358D;
 			packageReferences = (
@@ -371,6 +379,7 @@
 			files = (
 				A52DC5492539ED6B0023358D /* Preview Assets.xcassets in Resources */,
 				A52DC5462539ED6B0023358D /* Assets.xcassets in Resources */,
+				A56CF4B8254325510086396D /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A52DC571253ACEBA0023358D /* Assets.xcassets in Resources */,
+				A56CF4CA25432F570086396D /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A56CF4F9254339C50086396D /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +411,7 @@
 				A52DC5422539ED6A0023358D /* CovidApp.swift in Sources */,
 				A51DC860253C2A7B004F1761 /* AreaViewModel.swift in Sources */,
 				A52DC5522539ED8E0023358D /* CovidDataSource.swift in Sources */,
-				A52DC574253ACEBA0023358D /* CovidWidget.intentdefinition in Sources */,
+				A56CF4CE25432FD90086396D /* CovidWidget.intentdefinition in Sources */,
 				A56CF47025421C9F0086396D /* CovidModels.swift in Sources */,
 				A53EE553254200D0003508D9 /* AreaSectionView.swift in Sources */,
 				A53EE536254147BD003508D9 /* ListSearchBar.swift in Sources */,
@@ -419,7 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A52DC573253ACEBA0023358D /* CovidWidget.intentdefinition in Sources */,
+				A56CF4CF25432FD90086396D /* CovidWidget.intentdefinition in Sources */,
 				A53EE545254153A5003508D9 /* Collection+Extension.swift in Sources */,
 				A56CF47A25421D540086396D /* CovidModels.swift in Sources */,
 				A52DC5C6253B50A00023358D /* CovidProvider.swift in Sources */,
@@ -434,7 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A56CF47E25421D540086396D /* CovidModels.swift in Sources */,
-				A52DC59E253B23700023358D /* CovidWidget.intentdefinition in Sources */,
+				A56CF4D025432FD90086396D /* CovidWidget.intentdefinition in Sources */,
 				A53EE549254153BD003508D9 /* Collection+Extension.swift in Sources */,
 				A52DC593253AF2FE0023358D /* IntentHandler.swift in Sources */,
 				A52DC5A2253B23F10023358D /* CovidDataSource.swift in Sources */,
@@ -455,6 +466,27 @@
 			targetProxy = A52DC595253AF2FE0023358D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A56CF4BA254325510086396D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A56CF4B9254325510086396D /* en */,
+				A56CF4BE254325540086396D /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		A56CF4D225432FD90086396D /* CovidWidget.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A56CF4D125432FD90086396D /* en */,
+				A56CF4F52543381B0086396D /* ru */,
+			);
+			name = CovidWidget.intentdefinition;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A52DC54B2539ED6B0023358D /* Debug */ = {

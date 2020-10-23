@@ -15,23 +15,23 @@ struct AreaView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 AreaHeaderView(name: viewModel.name, statistic: viewModel.statistic)
-                AreaSectionView("Интервал") {
-                    Picker("Интервал", selection: $viewModel.timeInterval) {
+                AreaSectionView("Interval") {
+                    Picker("Interval", selection: $viewModel.timeInterval) {
                         ForEach(AreaViewModel.TimeInterval.allCases) { interval in
-                            Text(interval.rawValue).tag(interval)
+                            Text(LocalizedStringKey(interval.rawValue)).tag(interval)
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 }
-                AreaSectionView("Показатель") {
-                    Picker("Показатель", selection: $viewModel.rateType) {
+                AreaSectionView("Rate") {
+                    Picker("Rate", selection: $viewModel.rateType) {
                         ForEach(AreaViewModel.RateType.allCases) { interval in
                             Text(interval.rawValue).tag(interval)
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 }
-                AreaSectionView("График") {
+                AreaSectionView("Chart") {
                     Chart(data: viewModel.timelineData)
                         .chartStyle(
                             AreaChartStyle(
@@ -47,7 +47,7 @@ struct AreaView: View {
                         )
                         .frame(height: 200)
                 }
-                AreaSectionView("Все данные") {
+                AreaSectionView("All data") {
                     ForEach(viewModel.timelineEvents) { event in
                         VStack {
                             Text(event.date.mediumFormatted)
@@ -79,7 +79,7 @@ struct AreaView: View {
                         .cornerRadius(16)
                     }
                     HStack {
-                        Text("Данные предоставлены ")
+                        Text("Date from ")
                             .font(.system(size: 12))
                             .foregroundColor(.gray)
                         Link("yandex.ru", destination: URL(string: "https://yandex.ru/covid19/stat/widget/default/")!)

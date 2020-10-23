@@ -31,7 +31,7 @@ extension IntentHandler: CovidConfigurationIntentHandling {
                     break
                 }
             }, receiveValue: { data in
-                
+                                
                 func createSection(from areas: [Area], with title: String) -> INObjectSection<AreaCode> {
                     let areasCodes: [AreaCode] = areas
                         .filter { area in
@@ -52,12 +52,14 @@ extension IntentHandler: CovidConfigurationIntentHandling {
                             return areaCode
                         }
                     
-                    return INObjectSection(title: title, items: areasCodes)
+                    let localizedTitle = NSLocalizedString(title, comment: "")
+
+                    return INObjectSection(title: localizedTitle, items: areasCodes)
                 }
                                 
                 let collection = INObjectCollection(sections: [
-                    createSection(from: data.russianStates, with: "Регионы России"),
-                    createSection(from: data.countries, with: "Страны")
+                    createSection(from: data.russianStates, with: "Russian states"),
+                    createSection(from: data.countries, with: "Countries")
                 ])
                 
                 completion(collection, nil)

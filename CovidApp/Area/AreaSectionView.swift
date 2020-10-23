@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct AreaSectionView<Content: View>: View {
-    let title: String
+    let title: LocalizedStringKey
     let content: Content
 
-    init(_ title: String, @ViewBuilder content: () -> Content) {
+    init(_ title: LocalizedStringKey, @ViewBuilder content: () -> Content) {
         self.title = title
         self.content = content()
     }

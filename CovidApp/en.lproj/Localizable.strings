@@ -1,0 +1,29 @@
+/* 
+  Strings.strings
+  CovidApp
+
+  Created by Artem Belkov on 23.10.2020.
+  
+*/
+
+"Russian states" = "Russian states";
+"Countries" = "Countries";
+
+"Statistics" = "Statistics";
+
+"Search" = "Search";
+"Cancel" = "Cancel";
+
+"Interval" = "Interval";
+"Rate" = "Rate";
+"Chart" = "Chart";
+"All data" = "All data";
+
+"week" = "week";
+"month" = "month";
+"all time" = "all time";
+
+"Date from " = "Date from ";
+
+"COVID-19 statistics" = "COVID-19 statistics";
+"Monitoring statistics" = "Monitoring the statistics of coronavirus infection.";

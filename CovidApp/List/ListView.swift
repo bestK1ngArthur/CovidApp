@@ -19,7 +19,7 @@ struct ListView: View {
                     
                     if viewModel.russianStates.isNotEmpty {
                         Section(
-                            header: Text("Регионы России")
+                            header: Text("Russian states")
                                 .font(.system(size: 22, weight: .bold))
                                 .padding(.init(top: 16, leading: 16, bottom: 0, trailing: 16))
                         ) {
@@ -31,7 +31,7 @@ struct ListView: View {
                     
                     if viewModel.countries.isNotEmpty {
                         Section(
-                            header: Text("Страны")
+                            header: Text("Countries")
                                 .font(.system(size: 22, weight: .bold))
                                 .padding(.init(top: 16, leading: 16, bottom: 0, trailing: 16))
                         ) {
@@ -42,7 +42,7 @@ struct ListView: View {
                     }
                 }
             }
-            .navigationBarTitle("Статистика")
+            .navigationBarTitle("Statistics")
         }
         .onAppear {
             UIScrollView.appearance().backgroundColor = .primaryBackground
