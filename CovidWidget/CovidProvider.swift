@@ -27,7 +27,7 @@ class CovidProvider: IntentTimelineProvider {
         guard let request = request(from: configuration) else { return }
         
         loadEntry(for: request, configuration: configuration) { entry in
-            guard let updateDate = Calendar.current.date(byAdding: .hour, value: 12, to: .now) else {
+            guard let updateDate = Calendar.current.date(byAdding: .hour, value: 1, to: .now) else {
                 return
             }
 
