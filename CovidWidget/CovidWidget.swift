@@ -37,10 +37,12 @@ struct CovidWidgetEntryView: View {
             Spacer()
             HStack {
                 Spacer()
-                Text("-\(entry.statistic.cured)")
-                    .foregroundColor(.green)
-                    .lineLimit(1)
-                    .font(.caption)
+                if let vaccinated = entry.statistic.vaccinated {
+                    Text("-\(vaccinated)")
+                        .foregroundColor(.green)
+                        .lineLimit(1)
+                        .font(.caption)
+                }
                 Text("-\(entry.statistic.deaths)")
                     .font(.caption)
                     .lineLimit(1)

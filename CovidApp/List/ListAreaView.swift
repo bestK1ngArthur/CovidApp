@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListAreaView: View {
     @State var viewModel: ListAreaViewModel
-    
+
     var body: some View {
         NavigationLink(
             destination: AreaView(
@@ -27,10 +27,12 @@ struct ListAreaView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 VStack(alignment: .trailing) {
                     HStack {
-                        Text("-\(viewModel.statistic.cured)")
-                            .foregroundColor(.green)
-                            .lineLimit(1)
-                            .font(.caption)
+                        if let vaccinatedPercentage = viewModel.vaccinatedPercentage {
+                            Text(String(format: "%.1f", vaccinatedPercentage * 100) + "%")
+                                .foregroundColor(.green)
+                                .lineLimit(1)
+                                .font(.caption)
+                        }
                         Text("-\(viewModel.statistic.deaths)")
                             .font(.caption)
                             .lineLimit(1)
@@ -59,7 +61,8 @@ struct MainAreaView_Previews: PreviewProvider {
                 code: "213",
                 kind: .russianState,
                 name: "Москва",
-                statistic: .zero
+                statistic: .empty,
+                vaccinatedPercentage: nil
             )
         )
     }

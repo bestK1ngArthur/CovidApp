@@ -24,7 +24,8 @@ class ListViewModel: ObservableObject {
                                     code: area.code,
                                     kind: area.kind,
                                     name: area.name,
-                                    statistic: area.dailyStatistic
+                                    statistic: area.dailyStatistic,
+                                    vaccinatedPercentage: area.vaccinatedPercentage
                                 )
                             }
                         }

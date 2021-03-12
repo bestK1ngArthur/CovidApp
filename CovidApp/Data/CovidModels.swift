@@ -9,13 +9,15 @@ import Foundation
 
 struct Statistic {
     let cases: Int
-    let cured: Int
     let deaths: Int
+    let vaccinated: Int?
+    let fullyVaccinated: Int?
     
-    static let zero = Statistic(
+    static let empty: Statistic = .init(
         cases: 0,
-        cured: 0,
-        deaths: 0
+        deaths: 0,
+        vaccinated: nil,
+        fullyVaccinated: nil
     )
 }
 
@@ -47,6 +49,14 @@ struct Area {
     let dailyStatistic: Statistic
     
     let statisticTimeline: StatisticTimeline?
+    
+    var vaccinatedPercentage: Double? {
+        guard let fullyVaccinated = allTimeStatistic.fullyVaccinated else {
+            return nil
+        }
+
+        return Double(fullyVaccinated) / Double(population)
+    }
 }
 
 struct AreaRequest {

@@ -20,11 +20,13 @@ struct AreaHeaderView: View {
                 .font(.title)
                 .lineLimit(1)
                 .foregroundColor(.orange)
-            Text("-\(statistic.cured)")
-                .font(.title)
-                .lineLimit(1)
-                .font(.caption)
-                .foregroundColor(.green)
+            if let vaccinated = statistic.vaccinated {
+                Text("-\(vaccinated)")
+                    .font(.title)
+                    .lineLimit(1)
+                    .font(.caption)
+                    .foregroundColor(.green)
+            }
             Text("-\(statistic.deaths)")
                 .font(.title)
                 .lineLimit(1)
@@ -38,7 +40,7 @@ struct AreaHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         AreaHeaderView(
             name: "Москва",
-            statistic: .zero
+            statistic: .empty
         )
     }
 }

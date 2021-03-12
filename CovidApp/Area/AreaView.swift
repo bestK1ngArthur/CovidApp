@@ -60,11 +60,13 @@ struct AreaView: View {
                                     .font(.headline)
                                     .lineLimit(1)
                                     .foregroundColor(.orange)
-                                Text("-\(event.statistic.cured)")
-                                    .font(.headline)
-                                    .lineLimit(1)
-                                    .font(.caption)
-                                    .foregroundColor(.green)
+                                if let vaccinated = event.statistic.vaccinated {
+                                    Text("-\(vaccinated)")
+                                        .font(.headline)
+                                        .lineLimit(1)
+                                        .font(.caption)
+                                        .foregroundColor(.green)
+                                }
                                 Text("-\(event.statistic.deaths)")
                                     .font(.headline)
                                     .lineLimit(1)

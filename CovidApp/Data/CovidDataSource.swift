@@ -48,7 +48,7 @@ class CovidDataSource {
 
         return areaRawPublisher.combineLatest(datesPublisher)
             .tryMap { [unowned self] raw, dates in
-                try self.parseArea(from: raw, code: request.code, kind: request.kind, dates: dates)
+                try self.parseArea(from: raw, vaccinationRaw: nil, code: request.code, kind: request.kind, dates: dates)
             }
             .mapError { _ in CovidError.parsingError }
             .eraseToAnyPublisher()
@@ -58,7 +58,7 @@ class CovidDataSource {
     
     private let session = URLSession.shared
     
-    private let basePath = "https://yastat.net/s3/milab/2020/covid19-stat/data"
+    private let basePath = "https://yastat.net/s3/milab/2020/covid19-stat/data/v7"
     private var apiVersion: Int { .random(in: 1..<100) }
 
     private let dateFormatter: DateFormatter = {
@@ -92,6 +92,7 @@ class CovidDataSource {
     
     private func parseAreas(from raw: Raw, for kind: Area.Kind) throws -> [Area] {
         guard let areasRaw = raw[key(for: kind)] as? Raw,
+              let vaccinationRaw = raw["vaccination_struct"] as? [String: Raw],
               let data = areasRaw["data"] as? [String: Raw] else {
             throw CovidError.parsingError
         }
@@ -99,7 +100,13 @@ class CovidDataSource {
         let dates = try parseDates(from: raw, for: kind)
         
         let areas: [Area] = try data.map { code, rawArea in
-            try self.parseArea(from: rawArea, code: code, kind: kind, dates: dates)
+            try self.parseArea(
+                from: rawArea,
+                vaccinationRaw: vaccinationRaw[code],
+                code: code,
+                kind: kind,
+                dates: dates
+            )
         }
         
         return areas.sorted { first, second in
@@ -121,16 +128,20 @@ class CovidDataSource {
     }
 
     
-    private func parseArea(from raw: Raw, code: Area.Code, kind: Area.Kind, dates: [Date]? = nil) throws -> Area {
+    private func parseArea(
+        from raw: Raw,
+        vaccinationRaw: Raw?,
+        code: Area.Code,
+        kind: Area.Kind,
+        dates: [Date]? = nil
+    ) throws -> Area {
         guard let infoRaw = raw["info"] as? Raw,
               var name = infoRaw["name"] as? String,
               let population = infoRaw["population"] as? Int,
               let allCases = infoRaw["cases"] as? Int,
               let dailyCases = infoRaw["cases_delta"] as? Int,
               let allDeaths = infoRaw["deaths"] as? Int,
-              let dailyDeaths = infoRaw["deaths_delta"] as? Int,
-              let allCured = infoRaw["cured"] as? Int,
-              let dailyCured = infoRaw["cured_delta"] as? Int else {
+              let dailyDeaths = infoRaw["deaths_delta"] as? Int else {
             throw CovidError.parsingError
         }
         
@@ -141,25 +152,24 @@ class CovidDataSource {
         
         let allTimeStatistic = Statistic(
             cases: allCases,
-            cured: allCured,
-            deaths: allDeaths
+            deaths: allDeaths,
+            vaccinated: vaccinationRaw?["vac"] as? Int,
+            fullyVaccinated: vaccinationRaw?["peop_full_vac"] as? Int
         )
-        
+
         let dailyStatistic = Statistic(
             cases: dailyCases,
-            cured: dailyCured,
-            deaths: dailyDeaths
+            deaths: dailyDeaths,
+            vaccinated: nil,
+            fullyVaccinated: nil
         )
 
         var timeline: StatisticTimeline? = nil
         
         if let dates = dates, dates.isNotEmpty,
            let rawCases = raw["cases"] as? [[Int]],
-           let rawCured = raw["cured"] as? [[Int]],
            let rawDeaths = raw["deaths"] as? [[Int]] {
-            guard dates.count <= rawCases.count,
-                  rawCases.count == rawCured.count,
-                  rawCured.count == rawDeaths.count else {
+            guard dates.count <= rawCases.count else {
                 throw CovidError.invalidStatisticTimeline
             }
             
@@ -169,8 +179,9 @@ class CovidDataSource {
                         date: date,
                         statistic: .init(
                             cases: rawCases[index][valueIndex],
-                            cured: rawCured[index][valueIndex],
-                            deaths: rawDeaths[index][valueIndex]
+                            deaths: rawDeaths[index][valueIndex],
+                            vaccinated: nil,
+                            fullyVaccinated: nil
                         )
                     )
                 }

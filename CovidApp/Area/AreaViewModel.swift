@@ -13,7 +13,7 @@ class AreaViewModel: ObservableObject {
     let request: AreaRequest
     
     @Published var name: String = ""
-    @Published var statistic: Statistic = .zero
+    @Published var statistic: Statistic = .empty
     
     @Published var timeInterval: TimeInterval = .week
     @Published var rateType: RateType = .cases
@@ -38,7 +38,6 @@ class AreaViewModel: ObservableObject {
             self.timelineColor = {
                 switch rateType {
                 case .cases: return .orange
-                case .cured: return .green
                 case .deaths: return .red
                 }
             }()
@@ -61,7 +60,7 @@ class AreaViewModel: ObservableObject {
                             timeInterval: self.timeInterval,
                             rateType: self.rateType
                         )
-                        self.timelineEvents = timelineEvents
+                        self.timelineEvents = timelineEvents.reversed()
                     }
                   })
         
@@ -85,7 +84,6 @@ class AreaViewModel: ObservableObject {
             .map {
                 switch rateType {
                 case .cases: return Float($0.statistic.cases)
-                case .cured: return Float($0.statistic.cured)
                 case .deaths: return Float($0.statistic.deaths)
                 }
             }
@@ -112,7 +110,6 @@ extension AreaViewModel {
     
     enum RateType: String, CaseIterable, Identifiable {
         case cases = "🦠"
-        case cured = "💊"
         case deaths = "💀"
         
         var id: String { rawValue }

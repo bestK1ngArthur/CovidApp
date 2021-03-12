@@ -12,6 +12,7 @@ struct ListAreaViewModel: Identifiable {
     let kind: Area.Kind
     let name: String
     let statistic: Statistic
+    let vaccinatedPercentage: Double?
     
     let id = UUID()
 }

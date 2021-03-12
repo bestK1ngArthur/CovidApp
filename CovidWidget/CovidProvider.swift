@@ -122,8 +122,9 @@ struct CovidEntry: TimelineEntry {
         areaName: "Москва",
         statistic: .init(
             cases: 1000,
-            cured: 1000,
-            deaths: 0
+            deaths: 0,
+            vaccinated: nil,
+            fullyVaccinated: nil
         ),
         timelineData: [],
         configuration: CovidConfigurationIntent()
