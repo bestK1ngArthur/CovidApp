@@ -24,6 +24,7 @@ struct ListAreaView: View {
             HStack {
                 Text(viewModel.name)
                     .font(.headline)
+                    .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 VStack(alignment: .trailing) {
                     HStack {

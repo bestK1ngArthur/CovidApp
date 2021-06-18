@@ -58,7 +58,7 @@ class CovidDataSource {
     
     private let session = URLSession.shared
     
-    private let basePath = "https://yastat.net/s3/milab/2020/covid19-stat/data/v7"
+    private let basePath = "https://yastat.net/s3/milab/2020/covid19-stat/data/v10"
     private var apiVersion: Int { .random(in: 1..<100) }
 
     private let dateFormatter: DateFormatter = {
