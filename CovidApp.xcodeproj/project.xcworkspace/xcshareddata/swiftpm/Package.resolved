@@ -2,7 +2,7 @@
   "object": {
     "pins": [
       {
-        "package": "swiftui-charts",
+        "package": "Charts",
         "repositoryURL": "https://github.com/swift-extensions/swiftui-charts",
         "state": {
           "branch": null,
@@ -11,7 +11,7 @@
         }
       },
       {
-        "package": "swiftui-shapes",
+        "package": "Shapes",
         "repositoryURL": "https://github.com/swift-extensions/swiftui-shapes.git",
         "state": {
           "branch": null,
