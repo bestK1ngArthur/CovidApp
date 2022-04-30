@@ -58,8 +58,10 @@ class CovidDataSource {
     
     private let session = URLSession.shared
     
-    private let basePath = "https://yastat.net/s3/milab/2020/covid19-stat/data/v10"
-    private var apiVersion: Int { .random(in: 1..<100) }
+    private let apiVersion = 12
+    private var apiBasePath: String {
+        "https://yastat.net/s3/milab/2020/covid19-stat/data/v\(apiVersion)"
+    }
 
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -83,9 +85,9 @@ class CovidDataSource {
     }
     
     private func url(with component: String) -> URL {
-        var components = URLComponents(string: basePath)!
+        var components = URLComponents(string: apiBasePath)!
         
-        components.queryItems = [.init(name: "v", value: String(apiVersion))]
+        components.queryItems = [.init(name: "v", value: String(Int.random(in: 1..<100)))]
         
         return components.url!.appendingPathComponent(component)
     }
